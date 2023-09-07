@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Raporlama01.Models.Siparis>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Yeni Oluştur", "Create")
+</p>
+<link href="~/Content/simplePagination.css" rel="stylesheet" />
+
+
+<div id="TableFilter">
+    @Html.Action("Filtre", "Siparis")
+</div>
+
+
+<table class="table" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SiparisTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeslimAdresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeslimTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Musteri.MusteriAdi )
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Urun.UrunAdi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiparisTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeslimAdresi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeslimTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Musteri.MusteriAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urun.UrunAdi)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.SiparisNo }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.SiparisNo }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.SiparisNo })
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+<div class="pagination-page" style="margin-left:20px;margin-top:10px;"></div>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/jquery.simplePagination.js"></script>
+
+<script>
+
+    siteRoot = '@Request.ApplicationPath' + '/';
+    $(function () {
+        paginationTable();
+    });
+    function paginationTable() {
+        var items = $("table tbody tr");
+        var numItems = items.length;
+        var perPage = 13;
+        var pagination_placeholder_selector = ".pagination-page";
+        var myPageName = "#page-";
+        $('.pagination-page').show();
+        items.slice(perPage).hide();
+        if (items.length > 0) {
+            $(pagination_placeholder_selector).pagination({
+                items: numItems,
+                itemsOnPage: perPage,
+                cssStyle: "light-theme",
+                hrefTextPrefix: myPageName,
+                onPageClick: function (pageNumber) {
+                    var showFrom = perPage * (pageNumber - 1);
+                    var showTo = showFrom + perPage;
+
+                    items.hide()
+                        .slice(showFrom, showTo).show();
+                }
+            });
+            var checkFragment = function () {
+                var hash = window.location.hash || (myPageName + "1");
+                var re = new RegExp("^" + myPageName + "(\\d+)$");
+                hash = hash.match(re);
+                if (hash)
+                    $(pagination_placeholder_selector).pagination("selectPage", parseInt(hash[1]));
+            };
+            $(window).bind("popstate", checkFragment);
+            checkFragment();
+        }
+        else {
+            $('.pagination-page').hide();
+        }
+    }
+        function Ara() {
+            var musteriid = $('#MusteriCmb').val();
+            var flt = siteRoot + "Siparis/Index" + "?musteriid=" + musteriid;
+            $(".table").load(flt + " .table", function () {
+                paginationTable();
+            });
+        }
+
+        function Temizle() {
+            var flt = siteRoot + "Siparis/Index";
+            $(".table").load(flt + " .table", function () {
+               
+            });
+        }
+    </script>

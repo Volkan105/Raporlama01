@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Filtre";
+}
+
+@{
+    ViewBag.Title = "Filtre";
+    Layout = null;
+}
+<style>
+    .filter {
+        z-index: 10;
+        position: absolute;
+        right: 0;
+        display: flex;
+    }
+
+    .sag {
+        margin-left: 30px;
+        padding-top: 10px;
+        height: 40px;
+    }
+
+    .crd {
+        border-radius: 0;
+    }
+
+    .crd1 {
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+    .card-header {
+        padding: 5px;
+        background-color: white;
+    }
+
+    .mb {
+        margin-bottom: 0 !important;
+        margin-top: 10px;
+        float: right;
+        color: darkorange;
+    }
+
+    .mbalt {
+        margin-bottom: 0 !important;
+        margin-top: 10px;
+        float: left;
+        margin-left: 10px;
+        color: darkorange;
+    }
+
+    .drp {
+        font-size: 12px;
+        font-family: Roboto;
+        height: 38px;
+        margin-top: 10px;
+        margin-left: 5px;
+        min-width: 10% !important;
+    }
+
+    .crdborder {
+        border: 1px solid rgba(0,0,0,.125);
+    }
+
+    label {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+    }
+
+    .butonpadding {
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    .form-select {
+        max-width: 255px !important;
+    }
+</style>
+
+<h2>Filtre</h2>
+
+<div class="col-md-12" style="display:flex">
+    @Html.DropDownList("MusteriNo", null, "Müşteriler", htmlAttributes: new { @class = "form-select drp mt-10", id = "MusteriCmb" })
+
+    <input id="Button1" type="button" value="Ara" class="btn btn-lg alert-danger" style="margin-left:10px" onclick="Ara()" />
+    <input id="Button2" type="button" value="Temizle" class="btn alert-info" style="margin-left: 5px" onclick="Temizle()" />
+
+</div>

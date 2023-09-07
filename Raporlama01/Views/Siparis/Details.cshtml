@@ -1,0 +1,66 @@
+﻿@model Raporlama01.Models.Siparis
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Siparis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SiparisTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SiparisTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeslimAdresi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeslimAdresi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeslimTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeslimTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MusteriNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MusteriNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrunNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrunNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SiparisNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
